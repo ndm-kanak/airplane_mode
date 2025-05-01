@@ -49,6 +49,12 @@ app_license = "mit"
 # 	"Role": "home_page"
 # }
 
+website_route_rules = [
+    {"from_route": "/flights/<name>", "to_route": "flights/<name>"}
+]
+
+update_website_context = "airplane_mode.templates.pages.utils.get_website_context"
+
 # Generators
 # ----------
 

@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"Sl_xRMqrAh\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Airplane Mode</span>\",\"col\":12}},{\"id\":\"E_hhG_Xq9W\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airlines\",\"col\":3}},{\"id\":\"Jt93GKHDgb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"All Passengers\",\"col\":3}},{\"id\":\"17_5XHnVqC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"All Airplanes\",\"col\":3}}]",
+ "content": "[{\"id\":\"Sl_xRMqrAh\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Airplane Mode</span>\",\"col\":12}},{\"id\":\"sJ_yEgnUCJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Airlines\",\"col\":3}},{\"id\":\"vih0RpGlgD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"All Passengers\",\"col\":3}},{\"id\":\"7NkOQCmjOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"All Airplanes\",\"col\":3}}]",
  "creation": "2024-07-24 17:17:25.790193",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Airplane Mode",
  "links": [],
- "modified": "2024-07-24 17:22:27.682361",
+ "modified": "2025-04-21 12:13:22.552545",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Mode",
@@ -28,6 +28,31 @@
   }
  ],
  "sequence_id": 39.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Airlines",
+   "link_to": "Airline",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "All Passengers",
+   "link_to": "Flight Passenger",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "All Airplanes",
+   "link_to": "Airplane",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
  "title": "Airplane Mode"
 }
