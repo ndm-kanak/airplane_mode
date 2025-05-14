@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
  "autoname": "format:{airline}-{####}",
  "creation": "2024-07-24 16:31:24.606422",
@@ -43,9 +44,8 @@
    "label": "Initial Audit Completed"
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-24 13:03:08.000666",
+ "modified": "2025-05-02 13:01:22.187802",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane",

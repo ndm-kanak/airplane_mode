@@ -1,4 +1,4 @@
-from livspace import utils
+from airplane_mode import utils
 
 
 def after_migrate():

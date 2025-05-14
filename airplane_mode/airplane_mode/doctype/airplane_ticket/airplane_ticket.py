@@ -42,8 +42,17 @@ class AirplaneTicket(Document):
 				self.add_ons.remove(addon)
 		for amt in self.add_ons:
 			line_amt += amt.amount
-		self.total_amount = line_amt + self.flight_price
+		self.total_amount = line_amt + float(self.flight_price)
 
 	def on_submit(self):
 		if self.status != 'Boarded':
 			frappe.throw(_("You can only Submit Tickets with Boarded status."))
+
+@frappe.whitelist()
+def update_ticket_gate_numbers(flight_name, gate_number):
+    tickets = frappe.get_all("Airplane Ticket", filters={"flight": flight_name}, fields=["name"])
+    for t in tickets:
+        ticket = frappe.get_doc("Airplane Ticket", t.name)
+        ticket.gate_number = gate_number
+        ticket.save()
+    frappe.db.commit()

@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "add_translate_data": 0,
  "columns": [],
  "creation": "2025-04-21 18:13:40.949734",
@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2025-04-21 18:13:40.949734",
+ "modified": "2025-05-06 13:12:26.930963",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Revenue by Airline",

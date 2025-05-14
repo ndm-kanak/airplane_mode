@@ -5,60 +5,60 @@ import frappe
 from frappe import _
 
 def execute(filters=None):
-    # Get all airlines
-    airlines = frappe.get_all("Airline", fields=["name"])
 
-    # Get revenue grouped by airline from Airplane Ticket
-    revenue_data = frappe.db.sql("""
-        SELECT
-            ap.airline AS airline,
-            SUM(at.total_amount) as revenue
-        FROM `tabAirplane Ticket` at
-        LEFT JOIN `tabAirplane Flight` f ON at.flight = f.name
-        LEFT JOIN `tabAirplane` ap ON f.airplane = ap.name
-        WHERE at.docstatus = 1
-        GROUP BY ap.airline
-    """, as_dict=True)
+	airline_list = frappe.get_all("Airline", fields=["name"])
+	data = []
 
-    # Build a map of airline → revenue
-    revenue_map = {r["airline"]: r["revenue"] for r in revenue_data}
+	for airline in airline_list:
+		airplanes = frappe.get_all("Airplane", filters={"airline": airline.name}, pluck="name")
 
-    data = []
-    total_revenue = 0
+		airplane_flights = frappe.get_all("Airplane Flight", filters={"airplane": ["in", airplanes]}, pluck="name")
 
-    for airline in airlines:
-        revenue = revenue_map.get(airline.name, 0)
-        data.append({
-            "airline": airline.name,
-            "revenue": revenue
-        })
-        total_revenue += revenue
+		if airplane_flights:
+			tickets = frappe.get_all(
+				"Airplane Ticket",
+				filters={"flight": ["in", airplane_flights]},
+				fields=["total_amount"]
+			)
+			revenue = sum(float(ticket.total_amount) for ticket in tickets)
+		else:
+			revenue = 0
 
-    columns = [
-        {"label": _("Airline"), "fieldname": "airline", "fieldtype": "Link", "options": "Airline", "width": 250},
-        {"label": _("Revenue"), "fieldname": "revenue", "fieldtype": "Currency", "width": 180},
-    ]
+		data.append({
+			"airline": airline.name,
+			"revenue": revenue
+		})
 
-    summary = [
-        {
-            "label": _("Total Revenue"),
-            "value": total_revenue,
-            "datatype": "Currency",
-            "indicator": "Green"
-        }
-    ]
+	# Sort in descending order
+	data.sort(key=lambda x: x["revenue"], reverse=True)
 
-    chart = {
-        "data": {
-            "labels": [d["airline"] for d in data],
-            "datasets": [
-                {
-                    "name": "Revenue",
-                    "values": [d["revenue"] for d in data]
-                }
-            ]
-        },
-        "type": "donut"
-    }
+	total_revenue = sum(row["revenue"] for row in data)
 
-    return columns, data, None, chart, summary
+	columns = [
+		{"label": _("Airline"), "fieldname": "airline", "fieldtype": "Link", "options": "Airline", "width": 250},
+		{"label": _("Revenue"), "fieldname": "revenue", "fieldtype": "Currency", "width": 180},
+	]
+
+	summary = [
+		{
+			"label": _("Total Revenue"),
+			"value": total_revenue,
+			"datatype": "Currency",
+			"indicator": "Green"
+		}
+	]
+
+	chart = {
+		"data": {
+			"labels": [d["airline"] for d in data],
+			"datasets": [
+				{
+					"name": "Revenue",
+					"values": [d["revenue"] for d in data]
+				}
+			]
+		},
+		"type": "donut"
+	}
+
+	return columns, data, None, chart, summary
